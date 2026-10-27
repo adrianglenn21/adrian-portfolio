@@ -71,28 +71,28 @@ const projects = [
     description:
       "Landing page for an IoT monitoring dashboard. Replace this with a one-sentence summary of the problem it solves.",
     tags: ["IoT", "JavaScript"],
-    href: "#",
+    href: "https://pulse-grid-coral.vercel.app/",
   },
   {
     title: "FinFlow",
     description:
       "Personal finance dashboard. Replace this with what it does and what you’re proud of.",
     tags: ["Dashboard", "Python"],
-    href: "#",
+    href: "https://finflow-tkes.vercel.app/",
   },
   {
     title: "AquaPrint",
     description:
       "E-commerce landing page. Replace this with the audience, the goal, and the result.",
     tags: ["E-commerce", "HTML/CSS"],
-    href: "#",
+    href: "https://aqua-print.vercel.app/",
   },
   {
     title: "Argus Security",
     description:
       "Landing page for a CCTV services company. Replace this with your role and what you shipped.",
     tags: ["Landing page", "JavaScript"],
-    href: "#",
+    href: "https://argus-security-opal.vercel.app/",
   },
 ]
 
@@ -361,7 +361,6 @@ export default function Portfolio() {
             ))}
           </div>
         </section>
-
 
         {/* Experience */}
         <section id="education" className="scroll-mt-20 pt-20">
