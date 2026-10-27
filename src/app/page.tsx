@@ -1,4 +1,5 @@
 import type { SVGProps } from "react"
+import Image from "next/image"
 import Link from "next/link"
 import { ArrowUpRight, Mail } from "lucide-react"
 
@@ -13,6 +14,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
+import { MediaGallery, type MediaItem } from "@/components/media-gallery"
 
 /* Brand icons as local SVGs (newer lucide-react versions no longer ship them) */
 const svgProps = {
@@ -57,6 +59,7 @@ const profile = {
   name: "Adrian",
   role: "Software and DevOps Engineer",
   location: "Davao, Philippines",
+  photo: "", // e.g. "/profile.jpg" (file goes in public/). Leave empty to show your initial.
   year: 2026, // footer copyright year (update when it changes)
   headline: "I build and run software that stays up.",
   bio: "4+ years across backend systems, cloud infrastructure, IoT dashboards, and computer vision.",
@@ -93,57 +96,48 @@ const projects = [
   },
 ]
 
-const work =
-  [
-    {
-      period: "2025 – Present",
-      title: "Freelance Software Developer & DevOps Engineer",
-      detail:
-        "Developing IoT monitoring dashboards, managing Proxmox infrastructure and Linux servers, and training YOLO computer vision models for real-time analytics and automation.",
-    },
-    {
-      period: "2023 – 2025",
-      title: "SAS-AIN – Dolibarr & PrestaShop Developer",
-      detail:
-        "Developed custom PHP modules, plugins, and integrations for Dolibarr ERP/CRM and PrestaShop e-commerce platforms, extending functionality to meet specific business requirements.",
-    },
-    {
-      period: "2021 – 2023",
-      title: "Salmet GmbH – Software Engineer",
-      detail:
-        "Built and maintained web applications, developed IoT solutions for device communication and data monitoring, and managed Linux server infrastructure and deployments.",
-    },
-    {
-      period: "2020 – 2021",
-      title: "Junior Full-Stack Developer",
-      detail:
-        "Designed and developed custom PHP-based CRM dashboards, implementing frontend interfaces, backend logic, and database integrations to streamline business workflows.",
-    },
-  ]
+const gallery: MediaItem[] = [
+  // Put files in public/gallery/ and reference them like "/gallery/your-file.jpg".
+  // // For YouTube, use { type: "video", youtube: "VIDEO_ID", title: "..." }.
+  // { type: "image", src: "/gallery/dashboard.jpg", title: "IoT dashboard", caption: "Live sensor charts and alerts." },
+  // { type: "video", youtube: "YOUTUBE_VIDEO_ID", title: "Project walkthrough", caption: "A short tour of how it works." },
+  // { type: "image", src: "/gallery/landing-page.jpg", title: "Client landing page", caption: "Responsive layout for a services company." },
+  { type: "video", src: "/gallery/yolo.mp4", poster: "/gallery/yolo.png", title: "Detection demo", caption: "YOLO model running on a live camera feed." },
+  { type: "image", src: "/gallery/scorsaizy.png", title: "Scorsaizy", caption: "Content Creation Web App" },
+  { type: "video", src: "/gallery/live-dashboard.mov", poster: "/gallery/live-dashboard.png", title: "Live 3D map Dashboard", caption: "Live 3D map dashboard" },
+]
 
+const work = [
+  {
+    period: "2025 – Present",
+    title: "Freelance Software Developer & DevOps Engineer",
+    detail:
+      "Developing IoT monitoring dashboards, managing Proxmox infrastructure and Linux servers, and training YOLO computer vision models for real-time analytics and automation.",
+  },
+  {
+    period: "2023 – 2025",
+    title: "SAS-AIN – Dolibarr & PrestaShop Developer",
+    detail:
+      "Developed custom PHP modules, plugins, and integrations for Dolibarr ERP/CRM and PrestaShop e-commerce platforms, extending functionality to meet specific business requirements.",
+  },
+  {
+    period: "2021 – 2023",
+    title: "Salmet GmbH – Software Engineer",
+    detail:
+      "Built and maintained web applications, developed IoT solutions for device communication and data monitoring, and managed Linux server infrastructure and deployments.",
+  },
+  {
+    period: "2020 – 2021",
+    title: "Junior Full-Stack Developer",
+    detail:
+      "Designed and developed custom PHP-based CRM dashboards, implementing frontend interfaces, backend logic, and database integrations to streamline business workflows.",
+  },
+]
 
 const stack = [
-  "Python",
-  "JavaScript",
-  "PHP",
-  "Flask",
-  "PostgreSQL",
-  "InfluxDB",
-  "Supabase",
-  "pandas",
-  "YOLO",
-  "FFmpeg",
-  "Docker",
-  "Proxmox",
-  "Prometheus",
-  "Grafana",
-  "Moodle",
-  "n8n",
-  "make.com",
-  "zapier",
-  "Claude",
-  "Cursor",
-  "Lovable"
+  "Python", "JavaScript", "PHP", "Flask", "PostgreSQL", "InfluxDB", "Supabase",
+  "pandas", "YOLO", "FFmpeg", "Docker", "Proxmox", "Prometheus", "Grafana",
+  "Moodle", "n8n", "make.com", "zapier", "Claude", "Cursor", "Lovable",
 ]
 
 const socials = [
@@ -154,6 +148,7 @@ const socials = [
 
 const navLinks = [
   { label: "Projects", href: "#projects" },
+  { label: "Gallery", href: "#gallery" },
   { label: "Education", href: "#education" },
   { label: "Stack", href: "#stack" },
   { label: "Contact", href: "#socials" },
@@ -162,6 +157,71 @@ const navLinks = [
 /* ------------------------------------------------------------------ */
 /*  Page                                                               */
 /* ------------------------------------------------------------------ */
+
+/* Animated hero panel: IoT telemetry, computer vision, and a deploy pipeline */
+function HeroVisual() {
+  const steps = ["Build", "Test", "Deploy"]
+  return (
+    <div aria-hidden className="rounded-2xl border bg-card p-4 shadow-sm">
+      <div className="rounded-lg border bg-background p-3">
+        <div className="mb-2 flex items-center justify-between text-xs text-muted-foreground">
+          <span className="flex items-center gap-1.5">
+            <span className="hv-pulse size-2 rounded-full bg-green-500" />
+            IoT telemetry
+          </span>
+          <span className="font-mono">live</span>
+        </div>
+        <svg
+          viewBox="0 0 200 48"
+          className="h-12 w-full text-primary"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path
+            className="hv-spark"
+            pathLength={1}
+            d="M0 34 L20 28 L40 36 L60 18 L80 24 L100 12 L120 22 L140 10 L160 20 L180 8 L200 16"
+          />
+        </svg>
+      </div>
+
+      <div className="mt-3 rounded-lg border bg-background p-3">
+        <div className="mb-2 flex items-center justify-between text-xs text-muted-foreground">
+          <span>Computer vision</span>
+          <span className="font-mono">YOLO</span>
+        </div>
+        <div className="relative h-28 overflow-hidden rounded-md bg-muted">
+          <div className="hv-box absolute h-14 w-20 rounded-sm border-2 border-primary">
+            <span className="absolute -top-5 -left-0.5 whitespace-nowrap rounded-sm bg-primary px-1 font-mono text-[10px] text-primary-foreground">
+              object 0.97
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-3 rounded-lg border bg-background p-3">
+        <div className="mb-2 flex items-center justify-between text-xs text-muted-foreground">
+          <span>DevOps pipeline</span>
+          <span className="font-mono">Docker, Proxmox</span>
+        </div>
+        <div className="flex items-center gap-2">
+          {steps.map((step, i) => (
+            <span
+              key={step}
+              className="hv-step flex-1 rounded-md border px-2 py-1.5 text-center text-xs font-medium"
+              style={{ animationDelay: `${i * 1.2}s` }}
+            >
+              {step}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
 
 export default function Portfolio() {
   return (
@@ -174,9 +234,26 @@ export default function Portfolio() {
         }
         .marquee-track { animation: marquee-ltr 40s linear infinite; }
         .marquee:hover .marquee-track { animation-play-state: paused; }
+        @keyframes hv-draw { 0% { stroke-dashoffset: 1; } 60%, 100% { stroke-dashoffset: 0; } }
+        @keyframes hv-pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .4; transform: scale(1.5); } }
+        @keyframes hv-scan {
+          0% { left: 8%; top: 32%; } 35% { left: 46%; top: 42%; }
+          70% { left: 68%; top: 26%; } 100% { left: 8%; top: 32%; }
+        }
+        @keyframes hv-step {
+          0%, 8% { background: transparent; color: inherit; }
+          20%, 70% { background: var(--primary); color: var(--primary-foreground); }
+          85%, 100% { background: transparent; color: inherit; }
+        }
+        .hv-spark { stroke-dasharray: 1; stroke-dashoffset: 1; animation: hv-draw 4s ease-in-out infinite; }
+        .hv-pulse { animation: hv-pulse 1.6s ease-in-out infinite; }
+        .hv-box { animation: hv-scan 6s ease-in-out infinite; }
+        .hv-step { animation: hv-step 4.8s ease-in-out infinite; }
         @media (prefers-reduced-motion: reduce) {
           .marquee-track { animation: none; }
           .marquee { overflow-x: auto; }
+          .hv-spark { animation: none; stroke-dashoffset: 0; }
+          .hv-pulse, .hv-box, .hv-step { animation: none; }
         }
       `}</style>
 
@@ -205,33 +282,47 @@ export default function Portfolio() {
 
       <main id="top" className="mx-auto max-w-5xl px-5">
         {/* Hero */}
-        <section className="pt-20">
-          <div className="mb-6 flex items-center gap-5">
-            <div
-              aria-hidden
-              className="grid size-[72px] shrink-0 place-items-center rounded-full border bg-muted text-2xl font-semibold"
-            >
-              {profile.name[0]}
+        <section className="grid items-center gap-10 pt-20 lg:grid-cols-[1.15fr_1fr]">
+          <div>
+            <div className="mb-6 flex items-center gap-5">
+              {profile.photo ? (
+                <Image
+                  src={profile.photo}
+                  alt={`${profile.name}, profile photo`}
+                  width={96}
+                  height={96}
+                  priority
+                  className="size-24 shrink-0 rounded-full border object-cover"
+                />
+              ) : (
+                <div
+                  aria-hidden
+                  className="grid size-24 shrink-0 place-items-center rounded-full border bg-muted text-3xl font-semibold"
+                >
+                  {profile.name[0]}
+                </div>
+              )}
+              <Badge variant="outline" className="gap-1.5 py-1">
+                <span className="size-2 rounded-full bg-green-500" />
+                Available for new projects
+              </Badge>
             </div>
-            <Badge variant="outline" className="gap-1.5 py-1">
-              <span className="size-2 rounded-full bg-green-500" />
-              Available for new projects
-            </Badge>
+            <h1 className="max-w-3xl text-4xl font-bold leading-[1.05] tracking-tighter sm:text-5xl">
+              Hi, I’m {profile.name}. {profile.headline}
+            </h1>
+            <p className="mt-4 max-w-xl text-lg text-muted-foreground">
+              {profile.role} in {profile.location}. {profile.bio}
+            </p>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <Button render={<Link href="#projects" />} nativeButton={false}>
+                View projects
+              </Button>
+              <Button render={<Link href="#socials" />} nativeButton={false} variant="outline">
+                Get in touch
+              </Button>
+            </div>
           </div>
-          <h1 className="max-w-3xl text-4xl font-bold leading-[1.05] tracking-tighter sm:text-5xl md:text-6xl">
-            Hi, I’m {profile.name}. {profile.headline}
-          </h1>
-          <p className="mt-4 max-w-xl text-lg text-muted-foreground">
-            {profile.role} in {profile.location}. {profile.bio}
-          </p>
-          <div className="mt-7 flex flex-wrap gap-3">
-            <Button render={<Link href="#projects" />} nativeButton={false}>
-              View projects
-            </Button>
-            <Button render={<Link href="#socials" />} nativeButton={false} variant="outline">
-              Get in touch
-            </Button>
-          </div>
+          <HeroVisual />
         </section>
 
         {/* Projects */}
@@ -271,12 +362,10 @@ export default function Portfolio() {
           </div>
         </section>
 
-        {/* School attainment */}
+
+        {/* Experience */}
         <section id="education" className="scroll-mt-20 pt-20">
-          <h2 className="text-3xl font-semibold tracking-tight">School attainment</h2>
-          <p className="mb-8 mt-2 max-w-xl text-muted-foreground">
-            Where I studied and what I earned.
-          </p>
+          <h2 className="text-3xl font-semibold tracking-tight">Work experience</h2>
           <ol className="ml-1 space-y-7 border-l pl-6">
             {work.map((e) => (
               <li key={e.title} className="relative">
