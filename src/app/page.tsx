@@ -59,7 +59,7 @@ const profile = {
   name: "Adrian",
   role: "Software and DevOps Engineer",
   location: "Davao, Philippines",
-  photo: "", // e.g. "/profile.jpg" (file goes in public/). Leave empty to show your initial.
+  photo: "/profile.png", // e.g. "/profile.jpg" (file goes in public/). Leave empty to show your initial.
   year: 2026, // footer copyright year (update when it changes)
   headline: "I build and run software that stays up.",
   bio: "4+ years across backend systems, cloud infrastructure, IoT dashboards, and computer vision.",
@@ -158,75 +158,80 @@ const navLinks = [
 /*  Page                                                               */
 /* ------------------------------------------------------------------ */
 
-/* Animated hero panel: IoT telemetry, computer vision, and a deploy pipeline */
-function HeroVisual() {
-  const steps = ["Build", "Test", "Deploy"]
+/* Hero background: apps get packaged and shipped up to the cloud */
+function CloudBackground() {
+  const routes = [
+    { d: "M560 600 C560 440 860 420 880 190", begin: "0s", label: "git push", x: 560 },
+    { d: "M760 600 C760 470 890 430 895 190", begin: "1.7s", label: "docker build", x: 760 },
+    { d: "M1010 600 C1010 460 930 420 910 190", begin: "3.4s", label: "deploy", x: 1010 },
+  ]
   return (
-    <div aria-hidden className="rounded-2xl border bg-card p-4 shadow-sm">
-      <div className="rounded-lg border bg-background p-3">
-        <div className="mb-2 flex items-center justify-between text-xs text-muted-foreground">
-          <span className="flex items-center gap-1.5">
-            <span className="hv-pulse size-2 rounded-full bg-green-500" />
-            IoT telemetry
-          </span>
-          <span className="font-mono">live</span>
-        </div>
-        <svg
-          viewBox="0 0 200 48"
-          className="h-12 w-full text-primary"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
+    <div
+      aria-hidden
+      className="pointer-events-none absolute left-1/2 top-0 -z-10 h-full w-screen -translate-x-1/2 overflow-hidden"
+      style={{
+        maskImage: "linear-gradient(to bottom, #000 75%, transparent)",
+        WebkitMaskImage: "linear-gradient(to bottom, #000 75%, transparent)",
+      }}
+    >
+      <svg viewBox="0 0 1200 600" preserveAspectRatio="xMaxYMid slice" className="size-full">
+        <defs>
+          <pattern id="cl-grid" width="48" height="48" patternUnits="userSpaceOnUse">
+            <path d="M48 0H0V48" fill="none" className="stroke-border" strokeWidth="1" />
+          </pattern>
+        </defs>
+        <rect width="1200" height="600" fill="url(#cl-grid)" opacity="0.6" />
+
+        {/* delivery routes */}
+        {routes.map((r) => (
+          <path key={r.d} d={r.d} fill="none" className="cl-flow stroke-primary/30" strokeWidth="2" strokeLinecap="round" />
+        ))}
+
+        {/* origins */}
+        {routes.map((r) => (
+          <text key={r.label} x={r.x} y={578} textAnchor="middle" fontSize="13" className="fill-muted-foreground font-mono">
+            {r.label}
+          </text>
+        ))}
+
+        {/* the cloud */}
+        <g transform="translate(790 60) scale(1.15)">
+          <ellipse cx="95" cy="108" rx="70" ry="14" fill="none" className="cl-ring stroke-primary" strokeWidth="2" />
           <path
-            className="hv-spark"
-            pathLength={1}
-            d="M0 34 L20 28 L40 36 L60 18 L80 24 L100 12 L120 22 L140 10 L160 20 L180 8 L200 16"
+            d="M50 110 C22 110 8 90 14 70 C18 54 34 46 46 50 C50 24 78 8 106 18 C124 24 134 40 134 52 C162 48 184 66 180 88 C177 102 164 110 148 110 Z"
+            className="fill-card stroke-primary/50"
+            strokeWidth="2"
           />
-        </svg>
-      </div>
+          <circle cx="95" cy="68" r="16" className="fill-primary" />
+          <path d="M87 68l6 6 12-13" fill="none" className="stroke-primary-foreground" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+        </g>
 
-      <div className="mt-3 rounded-lg border bg-background p-3">
-        <div className="mb-2 flex items-center justify-between text-xs text-muted-foreground">
-          <span>Computer vision</span>
-          <span className="font-mono">YOLO</span>
-        </div>
-        <div className="relative h-28 overflow-hidden rounded-md bg-muted">
-          <div className="hv-box absolute h-14 w-20 rounded-sm border-2 border-primary">
-            <span className="absolute -top-5 -left-0.5 whitespace-nowrap rounded-sm bg-primary px-1 font-mono text-[10px] text-primary-foreground">
-              object 0.97
-            </span>
-          </div>
-        </div>
-      </div>
-
-      <div className="mt-3 rounded-lg border bg-background p-3">
-        <div className="mb-2 flex items-center justify-between text-xs text-muted-foreground">
-          <span>DevOps pipeline</span>
-          <span className="font-mono">Docker, Proxmox</span>
-        </div>
-        <div className="flex items-center gap-2">
-          {steps.map((step, i) => (
-            <span
-              key={step}
-              className="hv-step flex-1 rounded-md border px-2 py-1.5 text-center text-xs font-medium"
-              style={{ animationDelay: `${i * 1.2}s` }}
-            >
-              {step}
-            </span>
-          ))}
-        </div>
-      </div>
+        {/* app packages travelling to the cloud */}
+        {routes.map((r) => (
+          <g key={`p-${r.d}`} className="cl-packet" opacity="0">
+            <rect x="-18" y="-13" width="36" height="26" rx="5" className="fill-card stroke-primary" strokeWidth="2" />
+            <path d="M-10 -4H6M-10 3H0" className="stroke-primary" strokeWidth="2" strokeLinecap="round" />
+            <animateMotion path={r.d} dur="5.1s" begin={r.begin} repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.12;0.85;1" dur="5.1s" begin={r.begin} repeatCount="indefinite" />
+          </g>
+        ))}
+      </svg>
+      {/* keeps the headline readable */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(90deg, var(--background) 0%, color-mix(in oklab, var(--background) 60%, transparent) 40%, transparent 70%)",
+        }}
+      />
     </div>
   )
 }
 
 export default function Portfolio() {
   return (
-    <div className="min-h-screen scroll-smooth bg-background text-foreground">
-      {/* Marquee animation: scrolls left to right, pauses on hover */}
+    <div className="min-h-screen scroll-smooth overflow-x-clip bg-background text-foreground">
+      {/* Animations: marquee (left to right), hero cloud routes */}
       <style>{`
         @keyframes marquee-ltr {
           from { transform: translateX(-50%); }
@@ -234,26 +239,15 @@ export default function Portfolio() {
         }
         .marquee-track { animation: marquee-ltr 40s linear infinite; }
         .marquee:hover .marquee-track { animation-play-state: paused; }
-        @keyframes hv-draw { 0% { stroke-dashoffset: 1; } 60%, 100% { stroke-dashoffset: 0; } }
-        @keyframes hv-pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .4; transform: scale(1.5); } }
-        @keyframes hv-scan {
-          0% { left: 8%; top: 32%; } 35% { left: 46%; top: 42%; }
-          70% { left: 68%; top: 26%; } 100% { left: 8%; top: 32%; }
-        }
-        @keyframes hv-step {
-          0%, 8% { background: transparent; color: inherit; }
-          20%, 70% { background: var(--primary); color: var(--primary-foreground); }
-          85%, 100% { background: transparent; color: inherit; }
-        }
-        .hv-spark { stroke-dasharray: 1; stroke-dashoffset: 1; animation: hv-draw 4s ease-in-out infinite; }
-        .hv-pulse { animation: hv-pulse 1.6s ease-in-out infinite; }
-        .hv-box { animation: hv-scan 6s ease-in-out infinite; }
-        .hv-step { animation: hv-step 4.8s ease-in-out infinite; }
+        @keyframes cl-dash { to { stroke-dashoffset: -12; } }
+        @keyframes cl-ring { 0% { transform: scale(.85); opacity: .55; } 100% { transform: scale(1.35); opacity: 0; } }
+        .cl-flow { stroke-dasharray: 4 8; animation: cl-dash 1.2s linear infinite; }
+        .cl-ring { transform-box: fill-box; transform-origin: center; animation: cl-ring 1.7s ease-out infinite; }
         @media (prefers-reduced-motion: reduce) {
           .marquee-track { animation: none; }
           .marquee { overflow-x: auto; }
-          .hv-spark { animation: none; stroke-dashoffset: 0; }
-          .hv-pulse, .hv-box, .hv-step { animation: none; }
+          .cl-flow, .cl-ring { animation: none; }
+          .cl-packet { display: none; }
         }
       `}</style>
 
@@ -282,8 +276,9 @@ export default function Portfolio() {
 
       <main id="top" className="mx-auto max-w-5xl px-5">
         {/* Hero */}
-        <section className="grid items-center gap-10 pt-20 lg:grid-cols-[1.15fr_1fr]">
-          <div>
+        <section className="relative isolate min-h-[36rem] pt-20 pb-10">
+          <CloudBackground />
+          <div className="relative max-w-2xl">
             <div className="mb-6 flex items-center gap-5">
               {profile.photo ? (
                 <Image
@@ -302,12 +297,12 @@ export default function Portfolio() {
                   {profile.name[0]}
                 </div>
               )}
-              <Badge variant="outline" className="gap-1.5 py-1">
+              <Badge variant="outline" className="gap-1.5 bg-background/70 py-1 backdrop-blur">
                 <span className="size-2 rounded-full bg-green-500" />
                 Available for new projects
               </Badge>
             </div>
-            <h1 className="max-w-3xl text-4xl font-bold leading-[1.05] tracking-tighter sm:text-5xl">
+            <h1 className="text-4xl font-bold leading-[1.05] tracking-tighter sm:text-5xl md:text-6xl">
               Hi, I’m {profile.name}. {profile.headline}
             </h1>
             <p className="mt-4 max-w-xl text-lg text-muted-foreground">
@@ -322,7 +317,6 @@ export default function Portfolio() {
               </Button>
             </div>
           </div>
-          <HeroVisual />
         </section>
 
         {/* Projects */}
@@ -362,9 +356,11 @@ export default function Portfolio() {
           </div>
         </section>
 
+        
+
         {/* Experience */}
         <section id="education" className="scroll-mt-20 pt-20">
-          <h2 className="text-3xl font-semibold tracking-tight">Work experience</h2>
+          <h2 className="mb-8 text-3xl font-semibold tracking-tight">Work experience</h2>
           <ol className="ml-1 space-y-7 border-l pl-6">
             {work.map((e) => (
               <li key={e.title} className="relative">
