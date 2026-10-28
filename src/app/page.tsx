@@ -356,8 +356,6 @@ export default function Portfolio() {
           </div>
         </section>
 
-        
-
         {/* Experience */}
         <section id="education" className="scroll-mt-20 pt-20">
           <h2 className="mb-8 text-3xl font-semibold tracking-tight">Work experience</h2>
@@ -415,7 +413,7 @@ export default function Portfolio() {
           <p className="mb-8 mt-2 max-w-xl text-muted-foreground">
             The fastest way to reach me is email.
           </p>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {socials.map(({ label, handle, href, icon: Icon }) => (
               <Link
                 key={label}
