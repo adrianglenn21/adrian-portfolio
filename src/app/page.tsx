@@ -69,28 +69,28 @@ const projects = [
   {
     title: "PulseGrid",
     description:
-      "Landing page for an IoT monitoring dashboard. Replace this with a one-sentence summary of the problem it solves.",
+      "Landing page for an IoT monitoring dashboard.",
     tags: ["IoT", "JavaScript"],
     href: "https://pulse-grid-coral.vercel.app/",
   },
   {
     title: "FinFlow",
     description:
-      "Personal finance dashboard. Replace this with what it does and what you’re proud of.",
+      "Personal finance dashboard.",
     tags: ["Dashboard", "Python"],
     href: "https://finflow-tkes.vercel.app/",
   },
   {
     title: "AquaPrint",
     description:
-      "E-commerce landing page. Replace this with the audience, the goal, and the result.",
+      "E-commerce landing page.",
     tags: ["E-commerce", "HTML/CSS"],
     href: "https://aqua-print.vercel.app/",
   },
   {
     title: "Argus Security",
     description:
-      "Landing page for a CCTV services company. Replace this with your role and what you shipped.",
+      "Landing page for a CCTV services company.",
     tags: ["Landing page", "JavaScript"],
     href: "https://argus-security-opal.vercel.app/",
   },
