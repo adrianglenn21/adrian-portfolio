@@ -78,7 +78,7 @@ const projects = [
     description:
       "A universal tournament management platform that allows users to create, customize, and manage competitions with automatically generated brackets, match schedules, standings, and results across different games and sports.",
     tags: ["JavaScript", "Shadcdn", "TailwindCSS"],
-    href: "https://bracketly-three.vercel.app/dashboard",
+    href: "https://bracketly-three.vercel.app",
   },
   {
     title: "PulseGrid",
@@ -369,7 +369,6 @@ export default function Portfolio() {
             ))}
           </div>
         </section>
-
      
         {/* Experience */}
         <section id="education" className="scroll-mt-20 pt-20">
