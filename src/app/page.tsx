@@ -363,15 +363,6 @@ export default function Portfolio() {
           </div>
         </section>
 
-        {/* Gallery */}
-        <section id="gallery" className="scroll-mt-20 pt-20">
-          <h2 className="text-3xl font-semibold tracking-tight">Gallery</h2>
-          <p className="mb-8 mt-2 max-w-xl text-muted-foreground">
-            Screenshots, demos, and walkthroughs. Select any item to view it full size.
-          </p>
-          <MediaGallery items={gallery} />
-        </section>
-
         {/* Experience */}
         <section id="education" className="scroll-mt-20 pt-20">
           <h2 className="mb-8 text-3xl font-semibold tracking-tight">Work experience</h2>
