@@ -67,6 +67,13 @@ const profile = {
 
 const projects = [
   {
+    title: "Readly",
+    description:
+      "Public-domain books from the Project Gutenberg collection",
+    tags: ["eBooks", "JavaScript", "Shadcdn", "TailwindCSS"],
+    href: "https://readly-blue.vercel.app/",
+  },
+  {
     title: "PulseGrid",
     description:
       "Landing page for an IoT monitoring dashboard.",
@@ -354,6 +361,15 @@ export default function Portfolio() {
               </Card>
             ))}
           </div>
+        </section>
+
+        {/* Gallery */}
+        <section id="gallery" className="scroll-mt-20 pt-20">
+          <h2 className="text-3xl font-semibold tracking-tight">Gallery</h2>
+          <p className="mb-8 mt-2 max-w-xl text-muted-foreground">
+            Screenshots, demos, and walkthroughs. Select any item to view it full size.
+          </p>
+          <MediaGallery items={gallery} />
         </section>
 
         {/* Experience */}
