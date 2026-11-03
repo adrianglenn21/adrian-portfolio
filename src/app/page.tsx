@@ -74,6 +74,13 @@ const projects = [
     href: "https://readly-blue.vercel.app/",
   },
   {
+    title: "Bracketly",
+    description:
+      "A universal tournament management platform that allows users to create, customize, and manage competitions with automatically generated brackets, match schedules, standings, and results across different games and sports.",
+    tags: ["JavaScript", "Shadcdn", "TailwindCSS"],
+    href: "https://bracketly-three.vercel.app/dashboard",
+  },
+  {
     title: "PulseGrid",
     description:
       "Landing page for an IoT monitoring dashboard.",
@@ -363,6 +370,7 @@ export default function Portfolio() {
           </div>
         </section>
 
+     
         {/* Experience */}
         <section id="education" className="scroll-mt-20 pt-20">
           <h2 className="mb-8 text-3xl font-semibold tracking-tight">Work experience</h2>
