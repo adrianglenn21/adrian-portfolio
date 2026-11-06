@@ -27,7 +27,10 @@ export default function RootLayout({
     // "dark" = black theme by default. Change to "light" for the white theme,
     // or remove it to follow the OS setting (see globals.css).
     <html lang="en" className={`dark ${geistSans.variable} ${geistMono.variable}`}>
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        {children}
+        <Analytics />
+      </body>
     </html>
   )
 }
